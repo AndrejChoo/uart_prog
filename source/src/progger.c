@@ -540,9 +540,9 @@ uint16_t mw_readCmd(uint8_t width, uint16_t add)
 	for(int i = 0; i < 16; i++)
 	{
 		_delay_us(mw_freq);
-		PGC_HIGH
 		//заполняем данные побитно
 		if(PGD_READ) tdat |= (1 << (15 - i));
+		PGC_HIGH		
 		_delay_us(mw_freq);
 		PGC_LOW
 	}
