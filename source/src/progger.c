@@ -417,7 +417,7 @@ void read_flash(void)
 	}
 	else
 	{
-		spi1_read(0x33, 0);
+		spi1_read(0x13, 0);
 		spi1_read(0x00, 0);
 		spi1_read(0x00, 0);
 		spi1_read(0x00, 0);
@@ -454,8 +454,12 @@ void write_flash(void)
 		while(!(read_sreg1() & (1 << 1)));
 
 		FLCS_LOW
-		spi1_read(0x02, 0);
+		if(f_type == 2)
+		{
+		spi1_read(0x12, 0);
 		if(f_type == 2) spi1_read((tmp >> 24), 0);
+		}
+		else spi1_read(0x02, 0);
 		spi1_read(((tmp >> 16)) & 0xFF, 0);
 		spi1_read(((tmp >> 8) & 0xFF), 0);
 		spi1_read((tmp & 0xFF), 0);
